@@ -4,6 +4,7 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var Contact = require('../contact/contact.model');
 
 var validationError = function(res, err) {
   return res.status(422).json(err);
@@ -45,6 +46,26 @@ exports.show = function (req, res, next) {
     if (!user) return res.status(401).send('Unauthorized');
     res.json(user.profile);
   });
+};
+
+// Get a single user all contacts
+exports.contacts = function (req, res) {
+    User.findById(req.params.id, function (err, user) {
+        if (err) {
+            return handleError(res, err);
+        }
+        if (!user) {
+            return res.status(404).send('User Not Found');
+        }
+        Contact.find({
+            '_id': {$in: user.contacts}
+        }, function (err, contacts) {
+            if (err) {
+                return handleError(res, err);
+            }
+            return res.json(contacts);
+        });
+    });
 };
 
 /**
