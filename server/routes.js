@@ -16,6 +16,7 @@ module.exports = function (app) {
 		if(allowedOrigins.indexOf(origin) > -1){
 			   res.setHeader('Access-Control-Allow-Origin', origin);
 		}
+		res.header('Access-Control-Allow-Methods', 'OPTIONS,GET,PUT,POST,DELETE');
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next();
     };
