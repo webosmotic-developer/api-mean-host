@@ -11,7 +11,11 @@ module.exports = function (app) {
 
     //CORS middleware
     var allowCrossDomain = function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", "http://localhost:8100");
+		var allowedOrigins = ['http://localhost:8100'];
+		var origin = req.headers.origin;
+		if(allowedOrigins.indexOf(origin) > -1){
+			   res.setHeader('Access-Control-Allow-Origin', origin);
+		}
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next();
     };
