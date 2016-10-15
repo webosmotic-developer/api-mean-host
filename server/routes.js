@@ -11,20 +11,19 @@ module.exports = function (app) {
 
     //CORS middleware
     var allowCrossDomain = function(req, res, next) {
-		var allowedOrigins = ['http://localhost:8100'];
+		var allowedOrigins = ['http://localhost:8100', 'http://localhost:3000', 'http://localhost:9000'];
 		var origin = req.headers.origin;
 		if(allowedOrigins.indexOf(origin) > -1){
 			   res.setHeader('Access-Control-Allow-Origin', origin);
 		}
-		res.header('Access-Control-Allow-Methods', 'OPTIONS,GET,PUT,POST,DELETE');
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, POST, DELETE');
+        res.header("Access-Control-Allow-Headers", 'Authorization, Origin, X-Requested-With, Content-Type, Accept');
         next();
     };
     app.use(allowCrossDomain);
 
     // Insert routes below
     app.use('/api/contacts', require('./api/contact'));
-    app.use('/api/things', require('./api/thing'));
     app.use('/api/users', require('./api/user'));
 
     app.use('/auth', require('./auth'));
