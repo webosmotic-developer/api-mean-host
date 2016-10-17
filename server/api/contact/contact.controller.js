@@ -41,9 +41,8 @@ exports.create = function (req, res) {
                 return res.status(404).send('user not found');
             }
             user.contacts.push(contact);
-            var updated = _.merge(user, req.body);
+            var updated = _.merge(user, contact._id);
             updated.save(function (err) {
-                console.log(err);
                 if (err) {
                     return handleError(res, err);
                 }
