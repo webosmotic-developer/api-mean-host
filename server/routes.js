@@ -10,13 +10,13 @@ var path = require('path');
 module.exports = function (app) {
 
     //CORS middleware
-    var allowCrossDomain = function(req, res, next) {
-		var allowedOrigins = ['http://localhost:8100', 'http://localhost:3000', 'http://localhost:9000'];
-		var origin = req.headers.origin;
-		if(allowedOrigins.indexOf(origin) > -1){
-			   res.setHeader('Access-Control-Allow-Origin', origin);
-		}
-		res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, PATCH, POST, DELETE');
+    var allowCrossDomain = function (req, res, next) {
+        var allowedOrigins = ['http://webosmotic.com', 'http://localhost:8100', 'http://localhost:3000', 'http://localhost:9000'];
+        var origin = req.headers.origin;
+        if (allowedOrigins.indexOf(origin) > -1) {
+            res.setHeader('Access-Control-Allow-Origin', origin);
+        }
+        res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, PATCH, POST, DELETE');
         res.header("Access-Control-Allow-Headers", 'Authorization, Origin, X-Requested-With, Content-Type, Accept');
         next();
     };
