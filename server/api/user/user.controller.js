@@ -103,6 +103,21 @@ exports.destroy = function (req, res) {
 };
 
 /**
+ * Destroy session
+ */
+exports.logout = function (req, res) {
+    // here is our security check
+    // this destroys the current session (not really necessary because you get a new one
+    req.session.destroy(function () {
+        // if you don't want destroy the whole session, because you anyway get a new one you also could just change
+        // the flags and remove the private information
+        req.session = null; // set flag
+        res.clearCookie('connect.sid', {path: '/'}); // see comments above
+        res.status(200).send('OK'); // tell the client everything went well
+    });
+};
+
+/**
  * Change a users password
  */
 exports.changePassword = function (req, res, next) {

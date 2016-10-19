@@ -15,5 +15,6 @@ router.get('/:id', auth.isAuthenticated(), controller.show);
 router.get('/:id/contacts', auth.isAuthenticated(), controller.contacts);
 router.post('/', controller.create);
 router.put('/:id', auth.isAuthenticated(), controller.update);
+router.post('/logout', auth.isAuthenticated(), controller.logout);
 
 module.exports = router;

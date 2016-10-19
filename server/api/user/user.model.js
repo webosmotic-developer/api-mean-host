@@ -85,6 +85,7 @@ UserSchema
             if (err) throw err;
             if (user) {
                 if (self.id === user.id) return respond(true);
+                if(self.provider != user.provider)  return respond(true);
                 return respond(false);
             }
             respond(true);
