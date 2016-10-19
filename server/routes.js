@@ -17,7 +17,8 @@ module.exports = function (app) {
             res.setHeader('Access-Control-Allow-Origin', origin);
         }
         res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, PATCH, POST, DELETE');
-        res.header("Access-Control-Allow-Headers", 'Authorization, Origin, X-Requested-With, Content-Type, Accept');
+        res.header('Access-Control-Allow-Headers', 'Authorization, Origin, X-Requested-With, Content-Type, Accept');
+        res.header('Access-Control-Allow-Credentials', 'true');
         next();
     };
     app.use(allowCrossDomain);
