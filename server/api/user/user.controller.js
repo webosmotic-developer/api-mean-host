@@ -97,8 +97,10 @@ exports.contacts = function (req, res) {
  */
 exports.destroy = function (req, res) {
     User.findByIdAndRemove(req.params.id, function (err, user) {
-        if (err) return res.status(500).send(err);
-        return res.status(204).send('No Content');
+        Contact.remove({_id: {$in: user.contacts}}, function (err) {
+            if (err) return res.status(500).send(err);
+            return res.status(204).send('No Content');
+        });
     });
 };
 
